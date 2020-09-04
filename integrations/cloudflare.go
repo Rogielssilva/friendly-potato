@@ -70,6 +70,12 @@ func ListZones() (zones Zones, err error) {
 	return
 }
 
+func DeleteZone(zone Zone) (err error) {
+	_, err = api.DeleteZone(zone.Id)
+
+	return
+}
+
 func CreateZone(zone Zone) (createdZone Zone, err error) {
 	z, err := api.CreateZone(zone.Name, true, cf.Account{ID: api.AccountID}, "full")
 	if err != nil {

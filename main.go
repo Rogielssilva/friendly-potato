@@ -8,7 +8,7 @@ import (
 
 func main() {
 	fmt.Println("teste")
-	err := integrations.InitAPI("OpmWl7p_ECwb1U2YMVlSXhqFW2017_we9lMCQ_4V")
+	err := integrations.InitAPI("IQjVxP6VgH67usDcznZ6O6NGtOyJdBvyood9WMvS")
 
 	if err != nil {
 		log.Fatalf("Fatal on auth %v", err)
@@ -20,22 +20,26 @@ func main() {
 		log.Fatal(err)
 	}
 
-	zones,err=integrations.ListZones()
-	if err!=nil{
+	zones, err = integrations.ListZones()
+	if err != nil {
 		log.Fatal(err)
 	}
 
-	for _,z :=range zones{
-		fmt.Printf("zone: %v id: %v\n", z.Name,z.Id)
+	for _, z := range zones {
+		fmt.Printf("zone: %v id: %v\n", z.Name, z.Id)
 	}
 
-
-	//zone, err := integrations.CreateZone()
-
-	if err!=nil{
+	newZone := integrations.Zone{"idtest", " tutorialedge.net", []integrations.Record{}}
+	zone, err := integrations.CreateZone(newZone)
+	if err != nil {
 		log.Fatal(err)
 	}
 
+	err = integrations.DeleteZone(zone)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("%v\n", zone)
 
 }
-
